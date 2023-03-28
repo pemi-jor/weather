@@ -74,7 +74,7 @@ export class CounterComponent {
     data: [{
       type: "column",
       showInLegend: true,
-      name: "Revenue",
+      name: "Lämpötila",
       axisYType: "secondary",
       yValueFormatString: "$#,###",
       dataPoints: [
@@ -83,7 +83,7 @@ export class CounterComponent {
     }, {
       type: "spline",
       showInLegend: true,
-      name: "No of Orders",
+      name: "Tuulen nopeus",
       dataPoints: [
         this.weathers.map(w => { w.date, w.temperatureC })
       ]
