@@ -1,0 +1,74 @@
+<h1 id="tableLabel">Weather forecast</h1>
+<label>Paikkaunta</label>
+<input type="text" [(ngModel)]="location" />
+<button class="btn-submit" (click)="saveLocation()">Tallenna</button>
+<!--
+<button mat-raised-button (click)="openWeatherDialog()">Lisää sää</button>
+<button mat-raised-button (click)="openLocationDialog()">Lisää paikkakunta</button>
+-->
+
+<p *ngIf="!forecasts"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="forecasts" formArrayName="Rows">
+  <thead>
+    <tr>
+      <th>Päiväys</th>
+      <th>Lämpötila (C)</th>
+      <th>Tuulen nopeus (ms)</th>
+      <th>Paikkakunta</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let w of formArr.controls; let i = index; let l = last">
+      <td style="display:none;">
+        <input type="hidden" formControlName="id" />
+      </td>
+      <td>
+
+        <input type="date"
+               class="form-control"
+               id="date"
+               formControlName="date" />
+      </td>
+      <td>
+        <input type="number"
+               class="form-control"
+               id="temperatureC"
+               formControlName="temperatureC" />
+      </td>
+      <td>
+        <input type="number"
+               class="form-control"
+               id="windSpeed"
+               formControlName="windSpeed" />
+
+      </td>
+      <td>
+        <select name="state"
+               class="form-control" formControlName="locationId">
+          <option *ngFor="let lo of locations" [ngValue]="lo.id">
+            {{ lo.name }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <button *ngIf="formArr.length  > 1"
+                (click)="saveRow(i)"
+                class="btn btn-submit">
+          Tallena
+        </button>
+      </td>
+      <td>
+        <button *ngIf="formArr.length > 1"
+                (click)="deleteRow(i)"
+                class="btn btn-danger">
+          Poista
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-submit" (click)="addRow()">Uusi</button>
+
